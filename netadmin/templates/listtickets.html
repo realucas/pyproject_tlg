@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Department</td>
+            <td>Description of the Problem</td>
+            <td>Action</td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+               <td>{{ row["name"] }}</td>
+               <td>{{ row["email"] }}</td>
+               <td>{{ row["department"] }}</td>
+               <td>{{ row["description"] }}</td>	
+               <td><a href="">Edit</a> | <a href="">Delete</a></td>	
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Home</a> | <a href = "/enterticket">Create a New entry</a>
+   </body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+   <body>
+      <form action = "{{ url_for('addticket') }}" method = "POST">
+         <h2>Asset Information</h2>
+         Name:<br>
+         <input type = "text" name = "name" /><br>
+         
+         Email Address:<br>
+         <input type = "text" name = "email" /><br>
+         
+         Department:<br>
+         <input type = "text" name = "department" /><br>
+         
+         Description of the Problem:<br>
+         <textarea name = "description" ></textarea><br>
+         <input type = "submit" value = "Submit" /><br>
+      </form>
+      <h3><a href = "/listtickets">Cancel</a></h3>
+   </body>
+</html>

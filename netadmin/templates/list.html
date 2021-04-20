@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+         <thead>
+            <td>Hostname</td>
+            <td>IP Address</td>
+            <td>Location</td>
+            <td>Notes</td>
+            <td>Action</td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+               <td>{{ row["hostname"] }}</td>
+               <td>{{ row["ipaddr"] }}</td>
+               <td>{{ row["location"] }}</td>
+               <td>{{ row["notes"] }}</td>	
+               <td><a href="">Edit</a> | <a href="">Delete</a></td>	
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Home</a> | <a href = "/enternew">Create a New entry</a>
+   </body>
+</html>
