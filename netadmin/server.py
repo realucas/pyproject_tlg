@@ -23,7 +23,7 @@ def new_student():
 def new_tik():
     return render_template('tickets.html')
 
-# if someone uses student.html it will generate a POST
+
 # this post will be sent to /addrec
 # where the information will be added to the sqliteDB
 @app.route('/addrec',methods = ['POST'])
@@ -103,14 +103,35 @@ def list_tickets():
     rows = cur.fetchall()
     return render_template("listtickets.html",rows = rows) # return all of the sqliteDB info as HTML
 
+#Delete routes
+@app.route('/deltik/<tik_id>')
+def removetik(tik_id): 
+    con = sql.connect("database.db")
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+    cur.execute("DELETE FROM tickets WHERE tikID = ?", (tik_id,))
+    con.commit()
+    return redirect('/listtickets')
+
+@app.route('/remove/<ast_id>')
+def remove(ast_id): 
+    con = sql.connect("database.db")
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+    cur.execute("DELETE FROM assets WHERE assetID = ?", (ast_id,))
+    con.commit()
+    return redirect('/list')
+
 if __name__ == '__main__':
     try:
         # ensure the sqliteDB is created
         con = sql.connect('database.db')
         print("Opened database successfully")
         # ensure that the table assets is ready to be written to
-        con.execute('CREATE TABLE IF NOT EXISTS assets (hostname TEXT, ipaddr TEXT, location TEXT, notes TEXT)')
-        con.execute('CREATE TABLE IF NOT EXISTS tickets (name TEXT, email TEXT, department TEXT, description TEXT)')
+        con.execute('CREATE TABLE IF NOT EXISTS assets (assetID INTEGER PRIMARY KEY, hostname TEXT, ipaddr TEXT, location TEXT, notes TEXT)')
+        con.execute('CREATE TABLE IF NOT EXISTS tickets (tikID INTEGER PRIMARY KEY, name TEXT, email TEXT, department TEXT, description TEXT)')
         print("Table created successfully")
         con.close()
         # begin Flask Application 
